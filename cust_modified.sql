@@ -81,7 +81,7 @@ insert into Customer values('1079','Mrs','Elza','Lipke','4916368640668691',to_da
 insert into Customer values('1080','Ms','Devorah','Chickering','4539187803387163',to_date('20170822','YYYYMMDD'),'31 Douglas Blvd #950','Clovis','NM','5059758559','devorah@hotmail.com',NULL);
 insert into Customer values('1081','Mr','Timothy','Mulqueen','4916033193276694',to_date('20170713','YYYYMMDD'),'44 W 4th St','Staten Island','NY','7183326527','timothy_mulqueen@mulqueen.org',NULL);
 insert into Customer values('1082','Mrs','Arlette','Honeywell','4024007173946970',to_date('20171220','YYYYMMDD'),'11279 Loytan St','Jacksonville','FL','9047754480','ahoneywell@honeywell.com',NULL);
-insert into Customer values('1083','Ms','Dominque','Dickerson','4556113260307351',to_date('20180924','YYYYMMDD'),'69 Marquette Ave','Hayward','CA','5109933758','dominque.dickerson@dickerson.org',NULL);
+insert into Customer values('1083','Ms','Dominque','Dickerson','4556113260307351',to_date('20180924','YYYYMMDD'),'69 Marquette Ave','Hayward','CA','5109933758','dominque.dson@dickerson.org',NULL);
 insert into Customer values('1084','Mr','Lettie','Isenhower','4929911805521398',to_date('20170830','YYYYMMDD'),'70 W Main St','Beachwood','OH','2166577668','lettie_isenhower@yahoo.com',NULL);
 insert into Customer values('1085','Mrs','Myra','Munns','4539008927523485',to_date('20180814','YYYYMMDD'),'461 Prospect Pl #316','Euless','TX','8179147518','mmunns@cox.net',NULL);
 insert into Customer values('1086','Ms','Stephaine','Barfield','4539034680766616',to_date('20171115','YYYYMMDD'),'47154 Whipple Ave Nw','Gardena','CA','3107747643','stephaine@barfield.com',NULL);
@@ -112,7 +112,7 @@ insert into Customer values('1110','Mrs','Edna','Miceli','4556387669052855',to_d
 insert into Customer values('1111','Ms','Sue','Kownacki','4916663897455333',to_date('20170912','YYYYMMDD'),'2 Se 3rd Ave','Mesquite','TX','9726663413','sue@aol.com',001);
 insert into Customer values('1112','Mr','Jesusa','Shin','4024007176569167',to_date('20171204','YYYYMMDD'),'2239 Shawnee Mission Pky','Tullahoma','TN','9312738709','jshin@shin.com',NULL);
 insert into Customer values('1113','Mrs','Rolland','Francescon','4210331891175298',to_date('20170128','YYYYMMDD'),'2726 Charcot Ave','Paterson','NJ','9736492922','rolland@cox.net',NULL);
-insert into Customer values('1114','Ms','Pamella','Schmierer','4916239597904092',to_date('20170126','YYYYMMDD'),'5161 Dorsett Rd','Homestead','FL','3054208970','pamella.schmierer@schmierer.org',NULL);
+insert into Customer values('1114','Ms','Pamella','Schmierer','4916239597904092',to_date('20170126','YYYYMMDD'),'5161 Dorsett Rd','Homestead','FL','3054208970','pamella.sch@schmierer.org',NULL);
 insert into Customer values('1115','Mr','Glory','Kulzer','4556276011632805',to_date('20180615','YYYYMMDD'),'55892 Jacksonville Rd','Owings Mills','MD','4102249462','gkulzer@kulzer.org',NULL);
 insert into Customer values('1116','Mrs','Shawna','Palaspas','4178665798191571',to_date('20180330','YYYYMMDD'),'5 N Cleveland Massillon Rd','Thousand Oaks','CA','8052753566','shawna_palaspas@palaspas.org',NULL);
 insert into Customer values('1117','Ms','Brandon','Callaro','4485105085127283',to_date('20180502','YYYYMMDD'),'7 Benton Dr','Honolulu','HI','8082156832','brandon_callaro@hotmail.com',NULL);
@@ -128,11 +128,11 @@ insert into Customer values('1126','Mrs','Talia','Riopelle','4916939422656953',t
 insert into Customer values('1127','Ms','Van','Shire','4024007105004393',to_date('20170812','YYYYMMDD'),'90131 J St','Pittstown','NJ','9084092890','van.shire@shire.com',NULL);
 insert into Customer values('1128','Mr','Lucina','Lary','4539639455511441',to_date('20171128','YYYYMMDD'),'8597 W National Ave','Cocoa','FL','3217494981','lucina_lary@cox.net',NULL);
 insert into Customer values('1129','Mrs','Bok','Isaacs','4929727689563359',to_date('20180725','YYYYMMDD'),'6 Gilson St','Bronx','NY','7188093762','bok.isaacs@aol.com',NULL);
-insert into Customer values('1130','Ms','Rolande','Spickerman','4916434350761405',to_date('20180917','YYYYMMDD'),'65 W Maple Ave','Pearl City','HI','8083153077','rolande.spickerman@spickerman.com',NULL);
+insert into Customer values('1130','Ms','Rolande','Spickerman','4916434350761405',to_date('20180917','YYYYMMDD'),'65 W Maple Ave','Pearl City','HI','8083153077','rolande.s@spickerman.com',NULL);
 insert into Customer values('1131','Mr','Howard','Paulas','4716525902747768',to_date('20170610','YYYYMMDD'),'866 34th Ave','Denver','CO','3036234241','hpaulas@gmail.com',NULL);
 insert into Customer values('1132','Mrs','Kimbery','Madarang','4539075520196704',to_date('20170105','YYYYMMDD'),'798 Lund Farm Way','Rockaway','NJ','9733101634','kimbery_madarang@cox.net',NULL);
 insert into Customer values('1133','Ms','Thurman','Manno','4929696824694496',to_date('20180628','YYYYMMDD'),'9387 Charcot Ave','Absecon','NJ','6095243586','thurman.manno@yahoo.com',003);
-insert into Customer values('1134','Mr','Becky','Mirafuentes','4024007143155959',to_date('20180107','YYYYMMDD'),'30553 Washington Rd','Plainfield','NJ','9088778409','becky.mirafuentes@mirafuentes.com',NULL);
+insert into Customer values('1134','Mr','Becky','Mirafuentes','4024007143155959',to_date('20180107','YYYYMMDD'),'30553 Washington Rd','Plainfield','NJ','9088778409','becky.mir@mirafuentes.com',NULL);
 insert into Customer values('1135','Mrs','Beatriz','Corrington','4539720745843081',to_date('20170826','YYYYMMDD'),'481 W Lemon St','Middleboro','MA','5085844279','beatriz@yahoo.com',NULL);
 insert into Customer values('1136','Ms','Marti','Maybury','4916906809831525',to_date('20170222','YYYYMMDD'),'4 Warehouse Point Rd #7','Chicago','IL','7737754522','marti.maybury@yahoo.com',NULL);
 insert into Customer values('1137','Mr','Nieves','Gotter','4716257747903188',to_date('20180529','YYYYMMDD'),'4940 Pulaski Park Dr','Portland','OR','5035275274','nieves_gotter@gmail.com',NULL);
@@ -144,7 +144,7 @@ insert into Customer values('1142','Ms','Bulah','Padilla','4532675753193521',to_
 insert into Customer values('1143','Mr','Audra','Kohnert','4024007158495720',to_date('20171218','YYYYMMDD'),'134 Lewis Rd','Nashville','TN','6154067854','audra@kohnert.com',NULL);
 insert into Customer values('1144','Mrs','Daren','Weirather','4716528811828638',to_date('20181105','YYYYMMDD'),'9 N College Ave #3','Milwaukee','WI','4149592540','dweirather@aol.com',004);
 insert into Customer values('1145','Ms','Fernanda','Jillson','4556107739402389',to_date('20170911','YYYYMMDD'),'60480 Old Us Highway 51','Preston','MD','4103875260','fjillson@aol.com',NULL);
-insert into Customer values('1146','Mr','Gearldine','Gellinger','4916903988846655',to_date('20171202','YYYYMMDD'),'4 Bloomfield Ave','Irving','TX','9729346914','gearldine_gellinger@gellinger.com',NULL);
+insert into Customer values('1146','Mr','Gearldine','Gellinger','4916903988846655',to_date('20171202','YYYYMMDD'),'4 Bloomfield Ave','Irving','TX','9729346914','gearldine_g@gellinger.com',NULL);
 insert into Customer values('1147','Mrs','Chau','Kitzman','4556680934896316',to_date('20170131','YYYYMMDD'),'429 Tiger Ln','Beverly Hills','CA','3105608022','chau@gmail.com',NULL);
 insert into Customer values('1148','Ms','Theola','Frey','4024007108039040',to_date('20170216','YYYYMMDD'),'54169 N Main St','Massapequa','NY','5169485768','theola_frey@frey.com',NULL);
 insert into Customer values('1149','Mr','Cheryl','Haroldson','4916496131754579',to_date('20180315','YYYYMMDD'),'92 Main St','Atlantic City','NJ','6095187697','cheryl@haroldson.org',NULL);
@@ -209,8 +209,8 @@ insert into Customer values('1207','Mrs','Aliza','Baltimore','4916258881122880',
 insert into Customer values('1208','Ms','Mozell','Pelkowski','4929591140166586',to_date('20170506','YYYYMMDD'),'577 Parade St','South San Francisco','CA','6509471215','mpelkowski@pelkowski.org',NULL);
 insert into Customer values('1209','Mr','Viola','Bitsuie','4556867578663504',to_date('20170420','YYYYMMDD'),'70 Mechanic St','Northridge','CA','8188644875','viola@gmail.com',NULL);
 insert into Customer values('1210','Mrs','Franklyn','Emard','4716319485513700',to_date('20170702','YYYYMMDD'),'4379 Highway 116','Philadelphia','PA','2155588189','femard@emard.com',NULL);
-insert into Customer values('1211','Ms','Willodean','Konopacki','4916074995165321',to_date('20170912','YYYYMMDD'),'55 Hawthorne Blvd','Lafayette','LA','3372538384','willodean_konopacki@konopacki.org',001);
-insert into Customer values('1212','Mr','Beckie','Silvestrini','4556884264899938',to_date('20171204','YYYYMMDD'),'7116 Western Ave','Dearborn','MI','3135334884','beckie.silvestrini@silvestrini.com',NULL);
+insert into Customer values('1211','Ms','Willodean','Konopacki','4916074995165321',to_date('20170912','YYYYMMDD'),'55 Hawthorne Blvd','Lafayette','LA','3372538384','willodean_k@konopacki.org',001);
+insert into Customer values('1212','Mr','Beckie','Silvestrini','4556884264899938',to_date('20171204','YYYYMMDD'),'7116 Western Ave','Dearborn','MI','3135334884','beckie.s@silvestrini.com',NULL);
 insert into Customer values('1213','Mrs','Rebecka','Gesick','4816937627235657',to_date('20170128','YYYYMMDD'),'2026 N Plankinton Ave #3','Austin','TX','5122138574','rgesick@gesick.org',NULL);
 insert into Customer values('1214','Ms','Frederica','Blunk','4539300962868564',to_date('20170126','YYYYMMDD'),'99586 Main St','Dallas','TX','2144282285','frederica_blunk@gmail.com',NULL);
 insert into Customer values('1215','Mr','Glen','Bartolet','4485715756102306',to_date('20180615','YYYYMMDD'),'8739 Hudson St','Vashon','WA','2066975796','glen_bartolet@hotmail.com',NULL);
@@ -220,7 +220,7 @@ insert into Customer values('1218','Mr','Rima','Bevelacqua','4009931507022589',t
 insert into Customer values('1219','Mrs','Glendora','Sarbacher','4556360075960870',to_date('20170910','YYYYMMDD'),'2140 Diamond Blvd','Rohnert Park','CA','7076538214','gsarbacher@gmail.com',NULL);
 insert into Customer values('1220','Ms','Avery','Steier','4024007113947690',to_date('20180103','YYYYMMDD'),'93 Redmond Rd #492','Orlando','FL','4078089439','avery@cox.net',NULL);
 insert into Customer values('1221','Mr','Cristy','Lother','4024007157434464',to_date('20180318','YYYYMMDD'),'3989 Portage Tr','Escondido','CA','7609714322','cristy@lother.com',NULL);
-insert into Customer values('1222','Mrs','Nicolette','Brossart','4532819764713857',to_date('20180529','YYYYMMDD'),'1 Midway Rd','Westborough','MA','5088379230','nicolette_brossart@brossart.com',002);
+insert into Customer values('1222','Mrs','Nicolette','Brossart','4532819764713857',to_date('20180529','YYYYMMDD'),'1 Midway Rd','Westborough','MA','5088379230','nic_bro@brossart.com',002);
 insert into Customer values('1223','Ms','Tracey','Modzelewski','4024007164006735',to_date('20171115','YYYYMMDD'),'77132 Coon Rapids Blvd Nw','Conroe','TX','9362649294','tracey@hotmail.com',NULL);
 insert into Customer values('1224','Mr','Virgina','Tegarden','4485506881059507',to_date('20180410','YYYYMMDD'),'755 Harbor Way','Milwaukee','WI','4142148697','virgina_tegarden@tegarden.com',NULL);
 insert into Customer values('1225','Mr','Tiera','Frankel','4556341392010813',to_date('20170117','YYYYMMDD'),'87 Sierra Rd','El Monte','CA','6266364117','tfrankel@aol.com',NULL);
