@@ -3,6 +3,7 @@ Final Project for cs2055
 
 
 Instructions to test the files in order :
+
 1. run populate.sql -> start populate
 This generates / creates all the tables in the database
 
