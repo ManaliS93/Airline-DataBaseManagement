@@ -1,0 +1,10 @@
+Please make sure that the previously created functions and procedures created for milestone 1 are in the database.
+Along with those execute file flight_connection_view.sql
+
+
+To run the java code Use command 
+javac UI_class.java
+java UI_class
+
+
+                                                               
