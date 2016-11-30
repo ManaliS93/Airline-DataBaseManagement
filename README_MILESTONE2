@@ -6,5 +6,12 @@ To run the java code Use command
 javac UI_class.java
 java UI_class
 
+The password and username is hardcoded in the code.
 
+Assumptions :
+1. For Customer task 8 - Last cid is taken from the customer table.
+                       - Round trip is inserted as two separate trips with two different reservation numbers.
+                       - Round trips are considered in the form of either:
+                          1) A to B and B to A or 2) A - X - C and C - X - A (X can be any airport) 
+                       - Name of attribute arrival_city in Flight table is arival_city 
                                                                
