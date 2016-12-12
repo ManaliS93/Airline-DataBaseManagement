@@ -1,3 +1,5 @@
+package cs1555;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -77,6 +79,9 @@ public class UI_class {
 		int isAdmin;
 		String y = "";
 		Scanner in = new Scanner(System.in);
+		Scanner cont = new Scanner(System.in);
+		int run = 1;
+		while(run == 1){
 		System.out.println("Enter 1 for admin and 2 for user:");
 		isAdmin = in.nextInt();
 		if (isAdmin == 1) {
@@ -156,6 +161,10 @@ public class UI_class {
 
 			}
 
+		}
+		System.out.println("Enter 1 to continue further and 0 to exit");
+		run = cont.nextInt();
+		
 		}
 
 	}
@@ -251,7 +260,7 @@ public class UI_class {
 		for (String line = br.readLine(); line != null; line = br.readLine()) {
 
 			temp = line.split(",");
-			System.out.println("got " + temp[0] + " - " + temp[1] + " - " + temp[2]);
+			//System.out.println("got " + temp[0] + " - " + temp[1] + " - " + temp[2]);
 
 			prepStatement.setString(1, temp[0]);
 			prepStatement.setString(2, temp[1]);
@@ -298,7 +307,7 @@ public class UI_class {
 
 			try {
 				prepStatement.executeUpdate();
-				System.out.println("done");
+				System.out.println("Done");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -341,7 +350,7 @@ public class UI_class {
 
 				try {
 					prepStatement.executeUpdate();
-					System.out.println("done");
+					System.out.println("Done");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -359,8 +368,10 @@ public class UI_class {
 			int H_price = in.nextInt();
 			query = "update Price set Low_price = " + L_price + ",High_price = " + H_price
 					+ " where Departure_city = \'" + d_city + "\' and Arrival_city =\'" + a_city + "\'";
-			System.out.println(query);
+			//System.out.println(query);
 			int result = statement.executeUpdate(query);
+			if(result==1)
+			System.out.println("Successful!! ");
 			try {
 				if (statement != null)
 					statement.close();
@@ -439,7 +450,7 @@ public class UI_class {
 				+ flight_num + "\' and flight_date =to_date('" + flight_date + " " + flight_time
 				+ "','YYYYMMDD hh24:mi:ss')))";
 
-		System.out.println(query);
+		//System.out.println(query);
 		resultSet = statement.executeQuery(query); // run the query on the DB
 													// table
 		// System.out.println(resultSet.toString());
@@ -475,7 +486,7 @@ public class UI_class {
 		System.out.println("Enter Last Name : ");
 		String lname = in.nextLine();
 		String query1 = "select cid from Customer where first_name=\'" + fname + "\' and last_name=\'" + lname + "\'";
-		System.out.println("query 1 : " + query1);
+		//System.out.println("query 1 : " + query1);
 		statement = connection.createStatement();
 		resultSet = statement.executeQuery(query1);
 		// System.out.println("---->> "+resultSet.next());
@@ -483,7 +494,7 @@ public class UI_class {
 			System.out.println(fname + " " + lname + " already exist in the database");
 			Cust_task1();
 		} else {
-			System.out.println("Enter Credit card number : ");
+			System.out.println("Enter Credit card number (16 digit) : ");
 			String ccnum = in.nextLine();
 			System.out.println("Enter Credit card Expire date (yyyyMM): ");
 			String ccdate = in.nextLine();
@@ -496,13 +507,13 @@ public class UI_class {
 			String street = in.nextLine();
 			System.out.println("Enter City : ");
 			String city = in.nextLine();
-			System.out.println("Enter State : ");
+			System.out.println("Enter State (Abbreviation - 2 Letters): ");
 			String state = in.nextLine();
 			System.out.println("Enter Phone Number : ");
 			String phone = in.nextLine();
 			System.out.println("Enter Email : ");
 			String email = in.nextLine();
-			System.out.println("Enter Frequest Flyer id(Enter null if not applicable ) : ");
+			System.out.println("Enter Frequest Flyer id upto 5 digits (Enter null if not applicable ) : ");
 			String freq = in.nextLine();
 			if (freq.equalsIgnoreCase("null"))
 				freq = freq.toUpperCase();
@@ -524,8 +535,15 @@ public class UI_class {
 			prepStatement.setString(10, phone);
 			prepStatement.setString(11, email);
 			prepStatement.setString(12, freq);
-			prepStatement.executeUpdate();
-
+			try{
+			int validity = 0;
+			validity = prepStatement.executeUpdate();
+			if (validity == 1)
+				System.out.println("Customer record successfully added into the database");
+			}
+			catch(SQLException sq){
+				System.out.println("Errors while adding the record, please check the database schema and enter records accordingly!");
+			}
 		}
 
 	}
@@ -537,10 +555,13 @@ public class UI_class {
 		String fname = in.nextLine();
 		System.out.println("Enter Last Name");
 		String lname = in.nextLine();
-
+		statement = connection.createStatement();
 		// run the query on the DB table
-		// System.out.println(resultSet.toString());
-
+		// 
+		String selectQuery ="Select * from Customer where First_name='"+fname+"' and Last_name='"+lname+"'";
+		//System.out.println(selectQuery);
+		//String selectQuery ="Select * from Customer";
+		resultSet = statement.executeQuery(selectQuery);
 		// System.out.println("result set "+resultSet.next());
 		if (resultSet.next()) {
 			// System.out.println("in");
@@ -619,8 +640,10 @@ public class UI_class {
 		String f1=null,f2=null,c2=null,q1,q2,q,sched1 = null,sched2=null;
 		System.out.println("Enter Departure_city");
 		String dcity = in.nextLine();
+		dcity = dcity.toUpperCase();
 		System.out.println("Enter Arrival_City");
 		String acity = in.nextLine();
+		acity = acity.toUpperCase();
 		System.out.println();
 		statement = connection.createStatement(); // create an instance
 		String selectQuery = "select * from Flight where departure_city = '" + dcity + "' and Arival_city = '" + acity
@@ -641,12 +664,16 @@ public class UI_class {
 		}
 		//---------------------------1 leg ------------------------------------------------
 		
+		System.out.println("Flights with Connections : ");
 
 		String Query = "select * from Flight_connection where city1 = '" + dcity + "' and city3 = '" + acity + "'"; // sample
 		// query
 // 2
-		System.out.println(Query);
+		//System.out.println(Query);
 		resultSet1 = statement.executeQuery(Query);
+		if(!resultSet1.isBeforeFirst()){
+			System.out.println("There are no flights with connections for this route");
+		}
 		while (resultSet1.next()) {
 
 			ff1.add(resultSet1.getString(1));
@@ -671,7 +698,7 @@ public class UI_class {
 				d1time = Integer.parseInt(resultSet2.getString(2));
 				sched1 = resultSet2.getString(3);
 				
-				System.out.println(a1time + " " + d1time + " " + sched1 );
+				//System.out.println(a1time + " " + d1time + " " + sched1 );
 			}
 			q2 = "select Arrival_time, departure_time , Weekly_schedule from flight where flight_number='"
 					+ f2 + "'";
@@ -681,24 +708,26 @@ public class UI_class {
 				d2time = Integer.parseInt(resultSet3.getString(2));
 				sched2 = resultSet3.getString(3);
 				
-				System.out.println(a2time + " " + d2time + " " + sched2 );
+				//System.out.println(a2time + " " + d2time + " " + sched2 );
 			}
 			char[] a = sched1.toLowerCase().toCharArray();
 			char[] b = sched2.toLowerCase().toCharArray();
 			for (int i = 0; i < 7; i++) {
-				System.out.println("a1time " + a1time + " d2time " + d2time + " diff is " + (d2time - a1time));
+				//System.out.println("a1time " + a1time + " d2time " + d2time + " diff is " + (d2time - a1time));
 				if (a[i] == b[i] && a[i] != '-' && d2time - a1time > 100) {
 					System.out.println(f1  + "		" + dcity + "		" + c2 + "		" + a1time
 							+ "		" + d1time);
 					System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
 							+ "		" + d2time);
+					
+					System.out.println("-------------------------------------------------------------------------");
 					break;
 				}
 			}
 		}
 
 		
-		connection.commit();
+		//connection.commit();
 		try {
 			if (statement != null)
 				statement.close();
@@ -718,8 +747,10 @@ public class UI_class {
 		String f1=null,f2=null,c2=null,q1,q2,q,sched1 = null,sched2=null;
 		System.out.println("Enter Departure city");
 		String dcity = in.nextLine();
+		dcity = dcity.toUpperCase();
 		System.out.println("Enter Arrival City");
 		String acity = in.nextLine();
+		acity = acity.toUpperCase();
 		System.out.println("Enter Flight Date (YYYYMMDD)");
 		String date = in.nextLine();
 		ResultSet rs;
@@ -758,11 +789,11 @@ public class UI_class {
 			resultSet1 = statement.executeQuery(q1);
 			if(resultSet1.next())
 			capacity = resultSet1.getInt(1);
-			System.out.println("capacity : "+capacity);
+			//System.out.println("capacity : "+capacity);
 			if (NoR<capacity) {
 				 	
 				 	
-				System.out.println("Nor is : "+NoR);
+				//System.out.println("Nor is : "+NoR);
 				
 
 				System.out.println("	Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats");
@@ -773,6 +804,28 @@ public class UI_class {
 				counter++;
 
 				
+			}
+			else{
+				String qTemp = "select airline_id from Flight where flight_number = '"+f1+"'";
+				ResultSet tempRS1 = statement.executeQuery(qTemp);
+				
+				if(tempRS1.next()){
+					String airlineId = tempRS1.getString(1);
+					qTemp = "select MIN(plane_capacity) from Plane where owner_id='"+airlineId+"' and plane_capacity>"+NoR;
+					ResultSet tempRS2 = statement.executeQuery(qTemp);
+					if(tempRS2.next()){
+						int betterCapacity = tempRS2.getInt(1);
+						//System.out.println("Nor is : "+NoR);
+						
+
+						System.out.println("	Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats");
+						System.out.println("Record " + counter + ": " + f1 + "		" +
+
+								dcity + "		" + acity + "		" + dt
+								+ "		" + at+"		"+(betterCapacity-NoR));
+						counter++;
+					}
+				}
 			}
 			
 		
@@ -810,7 +863,7 @@ public class UI_class {
 				d1time = Integer.parseInt(resultSet2.getString(2));
 				sched1 = resultSet2.getString(3);
 				
-				System.out.println(a1time + " " + d1time + " " + sched1 );
+				//System.out.println(a1time + " " + d1time + " " + sched1 );
 			}
 			q2 = "select Arrival_time, departure_time , Weekly_schedule from flight where flight_number='"
 					+ f2 + "'";
@@ -820,7 +873,7 @@ public class UI_class {
 				d2time = Integer.parseInt(resultSet3.getString(2));
 				sched2 = resultSet3.getString(3);
 				
-				System.out.println(a2time + " " + d2time + " " + sched2 );
+				//System.out.println(a2time + " " + d2time + " " + sched2 );
 			}
 			char[] a = sched1.toLowerCase().toCharArray();
 			char[] b = sched2.toLowerCase().toCharArray();
@@ -828,7 +881,7 @@ public class UI_class {
 				//System.out.println("------------------------+++++++++++++");
 				//System.out.println("a1time " + a1time + " d2time " + d2time + " diff is " + (d2time - a1time));
 				if (a[i] == b[i] && a[i] != '-' && d2time - a1time > 100) {
-					System.out.println("conditions true for "+f1+" "+f2);
+					//System.out.println("conditions true for "+f1+" "+f2);
 					cStmt.setString(2, f1);
 					cStmt.setDate(3, date_reg);
 					cStmt.registerOutParameter(1, Types.INTEGER);
@@ -839,8 +892,8 @@ public class UI_class {
 					resultSet1 = statement.executeQuery(q1);
 					if(resultSet1.next())
 					capacity1 = resultSet1.getInt(1);
-					System.out.println("capacity1 : "+capacity1);
-					System.out.println("NOR1 "+NoR1);
+					//System.out.println("capacity1 : "+capacity1);
+					//System.out.println("NOR1 "+NoR1);
 					if(NoR1<capacity1)
 					{
 						//System.out.println("in for q2");
@@ -848,14 +901,14 @@ public class UI_class {
 						//System.out.println(q2);
 						resultSet2 = statement.executeQuery(q2);
 						if(resultSet2.next())
-						capacity2 = resultSet2.getInt(1);
-						System.out.println("capacity2 : "+capacity2);
+							capacity2 = resultSet2.getInt(1);
+						//System.out.println("capacity2 : "+capacity2);
 						cStmt.setString(2, f2);
 						cStmt.setDate(3, date_reg);
 						cStmt.registerOutParameter(1, Types.INTEGER);
 						cStmt.execute();
 						NoR2 = cStmt.getInt(1);
-						System.out.println("NOR2 "+NoR2);
+						//System.out.println("NOR2 "+NoR2);
 						
 						if(NoR2<capacity2)
 						
@@ -866,8 +919,97 @@ public class UI_class {
 								+ "		" + d1time+"		"+(capacity1 - NoR1));
 							System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
 								+ "		" + d2time+"		"+(capacity2 - NoR2));
-						break;
-					}}
+							break;
+						}
+						else{
+							String qTemp = "select airline_id from Flight where flight_number = '"+f2+"'";
+							ResultSet tempRS1 = statement.executeQuery(qTemp);
+							
+							if(tempRS1.next()){
+								String airlineId = tempRS1.getString(1);
+								qTemp = "select MAX(plane_capacity) from Plane where owner_id='"+airlineId+"'";
+								ResultSet tempRS2 = statement.executeQuery(qTemp);
+								if(tempRS2.next()){
+									int maxCapacity2 = tempRS2.getInt(1);
+									if(NoR2<maxCapacity2){
+										System.out.println("Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats");
+										
+										System.out.println(f1  + "		" + dcity + "		" + c2 + "		" + a1time
+											+ "		" + d1time+"		"+(capacity1 - NoR1));
+										System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
+											+ "		" + d2time+"		"+(maxCapacity2 - NoR2));
+										break;
+									}
+								}
+							}
+						}
+					}
+					else{
+						String qTemp = "select airline_id from Flight where flight_number = '"+f1+"'";
+						ResultSet tempRS1 = statement.executeQuery(qTemp);
+						//System.out.println("1");
+						if(tempRS1.next()){
+							//System.out.println("3");
+							String airlineId = tempRS1.getString(1);
+							qTemp = "select MAX(plane_capacity) from Plane where owner_id='"+airlineId+"'";
+							ResultSet tempRS2 = statement.executeQuery(qTemp);
+							//System.out.println("5");
+							if(tempRS2.next()){
+								//System.out.println("7");
+								int maxCapacity1 = tempRS2.getInt(1);
+								//System.out.println("maxCapacity1: "+maxCapacity1);
+								if(NoR1<maxCapacity1){
+									//System.out.println("in for q2");
+									q2= "select plane_capacity from ((select airline_id , plane_type from Flight where flight_number='"+f2+"') natural join Plane)";
+									//System.out.println(q2);
+									resultSet2 = statement.executeQuery(q2);
+									if(resultSet2.next())
+										capacity2 = resultSet2.getInt(1);
+									//System.out.println("capacity2 : "+capacity2);
+									cStmt.setString(2, f2);
+									cStmt.setDate(3, date_reg);
+									cStmt.registerOutParameter(1, Types.INTEGER);
+									cStmt.execute();
+									NoR2 = cStmt.getInt(1);
+									//System.out.println("NOR2 "+NoR2);
+									
+									if(NoR2<capacity2)
+									
+									{
+										System.out.println("Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats");
+									
+										System.out.println(f1  + "		" + dcity + "		" + c2 + "		" + a1time
+											+ "		" + d1time+"		"+(maxCapacity1 - NoR1));
+										System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
+											+ "		" + d2time+"		"+(capacity2 - NoR2));
+										break;
+									}
+									else{
+										qTemp = "select airline_id from Flight where flight_number = '"+f2+"'";
+										tempRS1 = statement.executeQuery(qTemp);
+										
+										if(tempRS1.next()){
+											airlineId = tempRS1.getString(1);
+											qTemp = "select MAX(plane_capacity) from Plane where owner_id='"+airlineId+"'";
+											tempRS2 = statement.executeQuery(qTemp);
+											if(tempRS2.next()){
+												int maxCapacity2 = tempRS2.getInt(1);
+												if(NoR2<maxCapacity2){
+													System.out.println("Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats");
+													
+													System.out.println(f1  + "		" + dcity + "		" + c2 + "		" + a1time
+														+ "		" + d1time+"		"+(maxCapacity1 - NoR1));
+													System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
+														+ "		" + d2time+"		"+(maxCapacity2 - NoR2));
+													break;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -892,8 +1034,10 @@ public class UI_class {
 		String f1=null,f2=null,c2=null,q1,q2,q,sched1 = null,sched2=null,aid1=null,aid2=null;
 		System.out.println("Enter Departure city");
 		String dcity = in.nextLine();
+		dcity = dcity.toUpperCase();
 		System.out.println("Enter Arrival City");
 		String acity = in.nextLine();
+		acity = acity.toUpperCase();
 		System.out.println("Enter Flight Date (YYYYMMDD)");
 		String date = in.nextLine();
 		System.out.println("Enter Name of the Airline");
@@ -915,7 +1059,7 @@ public class UI_class {
 		String selectQuery = "select * from Flight where departure_city = '" + dcity + "' and Arival_city = '" + acity
 				+ "' and airline_id='"+aid+"'"; 
 	
-		 System.out.println(selectQuery);
+		 //System.out.println(selectQuery);
 		resultSet = statement.executeQuery(selectQuery);
 		while (resultSet.next()) {
 			ff1.add(resultSet.getString(1));
@@ -954,6 +1098,28 @@ public class UI_class {
 				counter++;
 
 				
+			}
+			else{
+				String qTemp = "select airline_id from Flight where flight_number = '"+f1+"'";
+				ResultSet tempRS1 = statement.executeQuery(qTemp);
+				
+				if(tempRS1.next()){
+					String airlineId = tempRS1.getString(1);
+					qTemp = "select MIN(plane_capacity) from Plane where owner_id='"+airlineId+"' and plane_capacity>"+NoR;
+					ResultSet tempRS2 = statement.executeQuery(qTemp);
+					if(tempRS2.next()){
+						int betterCapacity = tempRS2.getInt(1);
+						//System.out.println("Nor is : "+NoR);
+						
+
+						System.out.println("	Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats		Airline Id");
+						System.out.println("Record " + counter + ": " + f1 + "		" +
+
+								dcity + "		" + acity + "		" + dt
+								+ "		" + at+"		"+(betterCapacity-NoR)+"	"+aid);
+						counter++;
+					}
+				}
 			}
 			
 		
@@ -1021,8 +1187,8 @@ public class UI_class {
 					resultSet1 = statement.executeQuery(q1);
 					if(resultSet1.next())
 					capacity1 = resultSet1.getInt(1);
-					System.out.println("capacity1 : "+capacity1);
-					System.out.println("NOR1 "+NoR1);
+					//System.out.println("capacity1 : "+capacity1);
+					//System.out.println("NOR1 "+NoR1);
 					if(NoR1<capacity1)
 					{
 						//System.out.println("in for q2");
@@ -1031,13 +1197,13 @@ public class UI_class {
 						resultSet2 = statement.executeQuery(q2);
 						if(resultSet2.next())
 						capacity2 = resultSet2.getInt(1);
-						System.out.println("capacity2 : "+capacity2);
+						//System.out.println("capacity2 : "+capacity2);
 						cStmt.setString(2, f2);
 						cStmt.setDate(3, date_reg);
 						cStmt.registerOutParameter(1, Types.INTEGER);
 						cStmt.execute();
 						NoR2 = cStmt.getInt(1);
-						System.out.println("NOR2 "+NoR2);
+						//System.out.println("NOR2 "+NoR2);
 						
 						if(NoR2<capacity2)
 						
@@ -1049,7 +1215,95 @@ public class UI_class {
 							System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
 								+ "		" + d2time+"		"+(capacity2 - NoR2)+"			"+aid);
 						break;
-					}}
+						}
+						else{
+							String qTemp = "select airline_id from Flight where flight_number = '"+f2+"'";
+							ResultSet tempRS1 = statement.executeQuery(qTemp);
+							
+							if(tempRS1.next()){
+								String airlineId = tempRS1.getString(1);
+								qTemp = "select MAX(plane_capacity) from Plane where owner_id='"+airlineId+"'";
+								ResultSet tempRS2 = statement.executeQuery(qTemp);
+								if(tempRS2.next()){
+									int maxCapacity2 = tempRS2.getInt(1);
+									if(NoR2<maxCapacity2){
+										System.out.println("Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats		Airline Id");
+										
+										System.out.println(f1  + "		" + dcity + "		" + c2 + "		" + a1time
+											+ "		" + d1time+"		"+(capacity1 - NoR1)+"			"+aid);
+										System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
+											+ "		" + d2time+"		"+(maxCapacity2 - NoR2)+"			"+aid);
+										break;
+									}
+								}
+							}
+						}
+					}
+					else{
+						String qTemp = "select airline_id from Flight where flight_number = '"+f1+"'";
+						ResultSet tempRS1 = statement.executeQuery(qTemp);
+						//System.out.println("1");
+						if(tempRS1.next()){
+							//System.out.println("3");
+							String airlineId = tempRS1.getString(1);
+							qTemp = "select MAX(plane_capacity) from Plane where owner_id='"+airlineId+"'";
+							ResultSet tempRS2 = statement.executeQuery(qTemp);
+							//System.out.println("5");
+							if(tempRS2.next()){
+								//System.out.println("7");
+								int maxCapacity1 = tempRS2.getInt(1);
+								//System.out.println("maxCapacity1: "+maxCapacity1);
+								if(NoR1<maxCapacity1){
+									q2= "select plane_capacity from ((select airline_id , plane_type from Flight where flight_number='"+f2+"') natural join Plane)";
+									//System.out.println(q2);
+									resultSet2 = statement.executeQuery(q2);
+									if(resultSet2.next())
+									capacity2 = resultSet2.getInt(1);
+									System.out.println("capacity2 : "+capacity2);
+									cStmt.setString(2, f2);
+									cStmt.setDate(3, date_reg);
+									cStmt.registerOutParameter(1, Types.INTEGER);
+									cStmt.execute();
+									NoR2 = cStmt.getInt(1);
+									//System.out.println("NOR2 "+NoR2);
+									
+									if(NoR2<capacity2)
+									
+									{
+										System.out.println("Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats		Airline Id");
+									
+										System.out.println(f1  + "		" + dcity + "		" + c2 + "		" + a1time
+											+ "		" + d1time+"		"+(capacity1 - NoR1)+"			"+aid);
+										System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
+											+ "		" + d2time+"		"+(capacity2 - NoR2)+"			"+aid);
+									break;
+									}
+									else{
+										qTemp = "select airline_id from Flight where flight_number = '"+f2+"'";
+										tempRS1 = statement.executeQuery(qTemp);
+										
+										if(tempRS1.next()){
+											airlineId = tempRS1.getString(1);
+											qTemp = "select MAX(plane_capacity) from Plane where owner_id='"+airlineId+"'";
+											tempRS2 = statement.executeQuery(qTemp);
+											if(tempRS2.next()){
+												int maxCapacity2 = tempRS2.getInt(1);
+												if(NoR2<maxCapacity2){
+													System.out.println("Flight Number	Departure_city	Arrival_city	Departure_time	Arrival_time	Available Seats		Airline Id");
+													
+													System.out.println(f1  + "		" + dcity + "		" + c2 + "		" + a1time
+														+ "		" + d1time+"		"+(maxCapacity1 - NoR1)+"			"+aid);
+													System.out.println(f2 +  "		" + c2 + "		" + acity + "		" + a2time
+														+ "		" + d2time+"		"+(maxCapacity2 - NoR2)+"			"+aid);
+													break;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -1105,7 +1359,7 @@ public class UI_class {
 		if(resultSet.next())
 			rid = Integer.parseInt(resultSet.getString(1));
 		rid=rid+1;
-		System.out.println("rid  "+rid);
+		//System.out.println("rid  "+rid);
 		q="select cid,credit_card_num from Customer order by cid desc";
 		resultSet = statement.executeQuery(q);
 		if(resultSet.next())
@@ -1167,14 +1421,14 @@ public class UI_class {
 				prepStatement.setDate(7, date);
 				prepStatement.setString(8, "N");
 				prepStatement.executeUpdate();
-				System.out.println("rtj is "+rtj+" count "+count);
+				//System.out.println("rtj is "+rtj+" count "+count);
 				Thread.sleep(7000);
 				prepStatement2 = connection.prepareStatement(q1);
 				if (rtj.equals("n") && count ==2)
 				{
 					
 					
-					System.out.println(" num 1");
+					//System.out.println(" num 1");
 					
 					java.sql.Date date_reg = new java.sql.Date(df.parse(fdate[i]).getTime());
 					prepStatement2.setString(1, rid+"");
@@ -1182,7 +1436,7 @@ public class UI_class {
 					prepStatement2.setDate(3, date_reg);
 					prepStatement2.setInt(4, 0);
 					prepStatement2.executeUpdate();
-					System.out.println(" num 2");
+					//System.out.println(" num 2");
 					Thread.sleep(7000);
 					 date_reg = new java.sql.Date(df.parse(fdate[i+1]).getTime());
 					prepStatement2.setString(1, rid+"");
@@ -1202,7 +1456,7 @@ public class UI_class {
 				if (rtj.equals("y") && count ==2)
 				{
 					date_reg = new java.sql.Date(df.parse(fdate[i]).getTime());
-					System.out.println(rid+" "+fid[i]+" "+date_reg);
+					//System.out.println(rid+" "+fid[i]+" "+date_reg);
 					Thread.sleep(5000);
 					
 					prepStatement2.setString(1, rid+"");
@@ -1225,7 +1479,7 @@ public class UI_class {
 					
 				}
 				if(count==1){
-					System.out.println("in count 1");
+					//System.out.println("in count 1");
 					Thread.sleep(5000);
 					date_reg = new java.sql.Date(df.parse(fdate[i]).getTime());
 					prepStatement2.setString(1, rid+"");
@@ -1241,7 +1495,7 @@ public class UI_class {
 					break;
 				}
 				if(count==4){
-					System.out.println(" num 122");
+					//System.out.println(" num 122");
 					
 				    date_reg = new java.sql.Date(df.parse(fdate[i]).getTime());
 					prepStatement2.setString(1, rid+"");
@@ -1249,7 +1503,7 @@ public class UI_class {
 					prepStatement2.setDate(3, date_reg);
 					prepStatement2.setInt(4, 0);
 					prepStatement2.executeUpdate();
-					System.out.println(" num 2222");
+					//System.out.println(" num 2222");
 					Thread.sleep(7000);
 					 date_reg = new java.sql.Date(df.parse(fdate[i+1]).getTime());
 					prepStatement2.setString(1, rid+"");
@@ -1331,8 +1585,10 @@ public class UI_class {
 		String aid = null;
 		System.out.println("Enter Departure_city");
 		String dcity = in.nextLine();
+		dcity = dcity.toUpperCase();
 		System.out.println("Enter Arrival_City");
 		String acity = in.nextLine();
+		acity = acity.toUpperCase();
 		System.out.println("Enter Name of the Airline");
 		String aname = in.nextLine();
 		//ResultSet resultSet1,resultSet2,resultSet3;
@@ -1346,7 +1602,7 @@ public class UI_class {
 		String selectQuery = "select * from Flight where departure_city = '" + dcity + "' and Arival_city = '" + acity
 				+ "' and airline_id='" + aid + "'"; // sample query
 		// 2
-		// System.out.println(selectQuery);
+		//System.out.println(selectQuery);
 		resultSet = statement.executeQuery(selectQuery);
 		while (resultSet.next()) {
 			System.out.println("Direct Trip from " + dcity + " To " + acity + " :");
@@ -1361,10 +1617,11 @@ public class UI_class {
 		}
 		//----------------with legs-------------------------------------
 		String Query = "select * from Flight_connection where city1 = '" + dcity + "' and city3 = '" + acity + "'"; // sample
-																													// query
+		System.out.println("Flights with Connections :");																										// query
 		// 2
-		System.out.println(Query);
+		//System.out.println(Query);
 		 resultSet1 = statement.executeQuery(Query);
+		 if (!resultSet1.isBeforeFirst()){System.out.println("There are no flights with connections for this route");}
 		while (resultSet1.next()) {
 
 			ff1.add(resultSet1.getString(1));
@@ -1390,7 +1647,7 @@ public class UI_class {
 				d1time = Integer.parseInt(resultSet2.getString(2));
 				sched1 = resultSet2.getString(3);
 				aid1 = resultSet2.getString(4);
-				System.out.println(a1time + " " + d1time + " " + sched1 + " " + aid1);
+				//System.out.println(a1time + " " + d1time + " " + sched1 + " " + aid1);
 			}
 			q2 = "select Arrival_time, departure_time , Weekly_schedule,airline_id from flight where flight_number='"
 					+ f2 + "'";
@@ -1400,22 +1657,23 @@ public class UI_class {
 				d2time = Integer.parseInt(resultSet3.getString(2));
 				sched2 = resultSet3.getString(3);
 				aid2 = resultSet3.getString(4);
-				System.out.println(a2time + " " + d2time + " " + sched2 + " " + aid2);
+				//System.out.println(a2time + " " + d2time + " " + sched2 + " " + aid2);
 			}
 			char[] a = sched1.toLowerCase().toCharArray();
 			char[] b = sched2.toLowerCase().toCharArray();
 			for (int i = 0; i < 7; i++) {
-				System.out.println("a1time "+a1time+" d2time "+d2time+" diff is "+(d2time-a1time));
+				//System.out.println("a1time "+a1time+" d2time "+d2time+" diff is "+(d2time-a1time));
 				if (a[i] == b[i] && a[i] != '-' && aid.equals(aid1) && aid.equals(aid2) && d2time-a1time>100){ 
 					System.out.println(f1 + "		" + aid + "		" + dcity + "		" + c2 + "		" + a1time
 							+ "		" + d1time);
 					System.out.println(f2 + "		" + aid + "		" + c2 + "		" + acity + "		" + a2time
 							+ "		" + d2time);
+					System.out.println("------------------------------------------------------------------------------------");
 					break;
 				}
 			}
 			}
-		connection.commit();
+		//connection.commit();
 
 		try {
 			if (statement != null)
